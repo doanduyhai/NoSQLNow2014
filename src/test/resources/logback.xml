@@ -7,9 +7,9 @@
     </appender>
 
 
-    <logger name="ACHILLES_DML_STATEMENT" level="OFF"/>
+    <logger name="ACHILLES_DML_STATEMENT" level="ON"/>
 
-    <logger name="ACHILLES_DDL_SCRIPT" level="OFF"/>
+    <logger name="ACHILLES_DDL_SCRIPT" level="ON"/>
 
     <logger name="info.archinnov.achilles.demo.entity.User" level="OFF"/>
 
