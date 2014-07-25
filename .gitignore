@@ -1,0 +1,12 @@
+*versionsBackup
+*releaseBackup
+release.properties
+*.kdb.lock
+*.orig
+*.iml
+*.ipr
+*.iws
+*.idea
+*.idea/* 
+target
+target/*
