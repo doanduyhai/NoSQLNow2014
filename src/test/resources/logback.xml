@@ -7,7 +7,7 @@
     </appender>
 
 
-    <logger name="ACHILLES_DML_STATEMENT" level="OFF"/>
+    <logger name="ACHILLES_DML_STATEMENT" level="DEBUG"/>
 
     <logger name="ACHILLES_DDL_SCRIPT" level="OFF"/>
 

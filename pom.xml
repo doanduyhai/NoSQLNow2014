@@ -6,10 +6,10 @@
 
     <groupId>info.archinnov</groupId>
     <artifactId>achilles-demo</artifactId>
-    <version>${javax.inject.version}.0-SNAPSHOT</version>
+    <version>1.0</version>
 
     <properties>
-        <achilles.version>3.0.5-SNAPSHOT</achilles.version>
+        <achilles.version>3.0.6</achilles.version>
 
         <commons-lang.version>2.6</commons-lang.version>
         <commons-io.version>2.4</commons-io.version>

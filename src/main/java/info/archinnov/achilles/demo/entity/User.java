@@ -6,11 +6,6 @@ import info.archinnov.achilles.annotations.Id;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- *
- */
-@Data
-@NoArgsConstructor
 @Entity(table = User.TABLE_NAME, comment = "users table")
 public class User {
 
@@ -28,6 +23,46 @@ public class User {
     public User(String login, String firstname, String lastname) {
         this.login = login;
         this.firstname = firstname;
+        this.lastname = lastname;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public User() {
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
         this.lastname = lastname;
     }
 }

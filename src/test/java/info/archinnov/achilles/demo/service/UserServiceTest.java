@@ -4,6 +4,8 @@ import static com.datastax.driver.core.querybuilder.QueryBuilder.eq;
 import static com.datastax.driver.core.querybuilder.QueryBuilder.insertInto;
 import static com.datastax.driver.core.querybuilder.QueryBuilder.select;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import info.archinnov.achilles.exception.AchillesLightWeightTransactionException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -13,7 +15,6 @@ import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
 import com.datastax.driver.core.querybuilder.Insert;
 import info.archinnov.achilles.demo.entity.User;
-import info.archinnov.achilles.exception.AchillesCASException;
 import info.archinnov.achilles.junit.AchillesResource;
 import info.archinnov.achilles.junit.AchillesResourceBuilder;
 import info.archinnov.achilles.persistence.PersistenceManager;
@@ -43,13 +44,13 @@ public class UserServiceTest {
         //Given
 
         //When
-        service.createUser("emc2", "Albert", "EINSTEIN");
+        service.createUser("emc²", "Albert", "EINSTEIN");
 
         //Then
-        final Row row = session.execute(select().from(User.TABLE_NAME).where(eq("login", "emc2"))).one();
+        final Row row = session.execute(select().from(User.TABLE_NAME).where(eq("login", "emc²"))).one();
 
         assertThat(row).isNotNull();
-        assertThat(row.getString("login")).isEqualTo("emc2");
+        assertThat(row.getString("login")).isEqualTo("emc²");
         assertThat(row.getString("firstname")).isEqualTo("Albert");
         assertThat(row.getString("lastname")).isEqualTo("EINSTEIN");
     }
@@ -57,11 +58,11 @@ public class UserServiceTest {
     @Test
     public void should_find_user_by_id() throws Exception {
         //Given
-        final Insert insert = insertInto(User.TABLE_NAME).value("login", "emc2").value("firstname", "Albert").value("lastname", "EINSTEIN");
+        final Insert insert = insertInto(User.TABLE_NAME).value("login", "emc²").value("firstname", "Albert").value("lastname", "EINSTEIN");
         session.execute(insert);
 
         //When
-        final User foundUser = service.findByLogin("emc2");
+        final User foundUser = service.findByLogin("emc²");
 
         //Then
         assertThat(foundUser.getFirstname()).isEqualTo("Albert");
@@ -69,12 +70,12 @@ public class UserServiceTest {
     }
 
 
-    @Test(expected = AchillesCASException.class)
+    @Test(expected = AchillesLightWeightTransactionException.class)
     public void should_fail_creating_user_if_already_exist() throws Exception {
         //Given
-        service.createUser("emc2", "Albert", "EINSTEIN");
+        service.createUser("emc²", "Albert", "EINSTEIN");
 
         //When
-        service.createUser("emc2", "Albert", "EINSTEIN");
+        service.createUser("emc²", "Albert", "EINSTEIN");
     }
 }
