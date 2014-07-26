@@ -4,6 +4,8 @@ import static com.datastax.driver.core.querybuilder.QueryBuilder.eq;
 import static com.datastax.driver.core.querybuilder.QueryBuilder.insertInto;
 import static com.datastax.driver.core.querybuilder.QueryBuilder.select;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import info.archinnov.achilles.exception.AchillesLightWeightTransactionException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -13,7 +15,6 @@ import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
 import com.datastax.driver.core.querybuilder.Insert;
 import info.archinnov.achilles.demo.entity.User;
-import info.archinnov.achilles.exception.AchillesCASException;
 import info.archinnov.achilles.junit.AchillesResource;
 import info.archinnov.achilles.junit.AchillesResourceBuilder;
 import info.archinnov.achilles.persistence.PersistenceManager;
@@ -69,7 +70,7 @@ public class UserServiceTest {
     }
 
 
-    @Test(expected = AchillesCASException.class)
+    @Test(expected = AchillesLightWeightTransactionException.class)
     public void should_fail_creating_user_if_already_exist() throws Exception {
         //Given
         service.createUser("emc2", "Albert", "EINSTEIN");

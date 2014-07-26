@@ -13,10 +13,18 @@ public class MessageService {
     PersistenceManager manager;
 
     public void createMessage(String login, UUID date, String interlocutor, String content) {
-
+        manager.insert(new Message(login, date, interlocutor, content));
     }
 
     public List<Message> fetchMessages(String login, UUID lastMessageDate, int pageSize) {
-        return null;
+
+        return manager.sliceQuery(Message.class)
+                .forSelect()
+                .withPartitionComponents(login)
+                .toClusterings(lastMessageDate)
+                .fromInclusiveToExclusiveBounds()
+                .limit(pageSize)
+                .orderByDescending()
+                .get();
     }
 }

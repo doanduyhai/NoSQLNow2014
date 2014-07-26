@@ -75,17 +75,17 @@ public class MessageServiceTest {
         UUID date4 = UUIDGen.getTimeUUID(4000);
         UUID date5 = UUIDGen.getTimeUUID(5000);
 
-        final Insert insert = insertInto(Message.TABLE_NAME)
+        final String insert = insertInto(Message.TABLE_NAME)
                 .value("login", bindMarker())
                 .value("date", bindMarker())
                 .value("interlocutor", bindMarker())
-                .value("content", bindMarker());
+                .value("content", bindMarker()).getQueryString();
 
-        session.execute(insert.getQueryString(),"emc2",date1,"max_plank","Message 1");
-        session.execute(insert.getQueryString(),"emc2",date2,"max_plank","Message 2");
-        session.execute(insert.getQueryString(),"emc2",date3,"max_plank","Message 3");
-        session.execute(insert.getQueryString(),"emc2",date4,"max_plank","Message 4");
-        session.execute(insert.getQueryString(),"emc2",date5,"max_plank","Message 5");
+        session.execute(insert,"emc2",date1,"max_plank","Message 1");
+        session.execute(insert,"emc2",date2,"max_plank","Message 2");
+        session.execute(insert,"emc2",date3,"max_plank","Message 3");
+        session.execute(insert,"emc2",date4,"max_plank","Message 4");
+        session.execute(insert,"emc2",date5,"max_plank","Message 5");
 
         //When
         final List<Message> messages = service.fetchMessages("emc2", date5, 3);
